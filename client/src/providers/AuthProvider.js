@@ -1,39 +1,42 @@
 import React, { useState } from 'react';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = React.createContext();
 export const AuthConsumer = AuthContext.Consumer;
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
+  
+  const navigate = useNavigate();
 
-  const handleRegister = (user, history) => {
+  const handleRegister = (user) => {
     axios.post("/api/auth", user)
       .then( res => {
         setUser(res.data.data);
-        history.push("/dash");
+        navigate("/dash");
       })
     .catch( res => {
       console.log(res);
     })
   }
   
-  const handleLogin = (user, history) => {
+  const handleLogin = (user) => {
     axios.post("/api/auth/sign_in", user)
       .then( res => {
         setUser(res.data.data);
-        history.push("/dash");
+        navigate("/dash");
       })
       .catch( res => {
         console.log(res);
       })
   }
   
-  const handleLogout = (history) => {
+  const handleLogout = () => {
     axios.delete("/api/auth/sign_out")
       .then( res => {
         setUser(null);
-        history.push('/login');
+        navigate('/login');
       })
       .catch( res => {
         console.log(res);
