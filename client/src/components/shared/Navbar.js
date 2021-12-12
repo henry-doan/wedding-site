@@ -14,11 +14,24 @@ const Navbar = ({ user, handleLogout }) => {
           <Link to="/dash">
             <li>Dashboard</li>
           </Link>
+          <Link to="/contacts">
+            <li>Contacts</li>
+          </Link>
         </>
       )
     } else {
       return(
         <>
+          <Link to="/">
+            <li>
+              Home
+            </li>
+          </Link>
+          <Link to="/contact">
+            <li>
+              Contact
+            </li>
+          </Link>
           <Link to="/login">
             <li>Login</li>
           </Link>
@@ -34,11 +47,6 @@ const Navbar = ({ user, handleLogout }) => {
     <>
       <nav>
         <ul>
-          <Link to="/">
-            <li>
-              Home
-            </li>
-          </Link>
           { rightNavItems() }
         </ul>
       </nav>
